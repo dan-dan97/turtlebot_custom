@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="serialport" default="/dev/kobuki"  doc="used by create to configure the port it is connected on [/dev/ttyUSB0, /dev/ttyS0]"/>
+
+  <include file="$(find turtlebot_custom_bringup)/launch/includes/robot.launch.xml"/>
+  
+  <include file="$(find turtlebot_custom_bringup)/launch/includes/mobile_base.launch.xml">
+    <arg name="serialport" value="$(arg serialport)" />
+  </include>
+  
+  <node pkg="urg_node" type="urg_node" name="urg_node" output="screen">
+    <param name="frame_id" value="laser_link"/>
+    <param name="angle_min" value="-2.0943951"/>
+    <param name="angle_max" value="2.0943951"/>
+  </node>
+
+</launch>
